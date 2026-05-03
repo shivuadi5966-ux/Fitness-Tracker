@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fitness Tracker Web App</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+    <!-- HOME VIEW -->
+    <div id="home-view" class="view active">
+        <div class="home-container">
+            <nav class="home-nav">
+                <div class="logo">🏋️ FitTrack</div>
+                <div class="nav-right">
+                    <div class="nav-auth-buttons">
+                        <button id="nav-login-btn" class="btn-secondary btn-sm">Login</button>
+                        <button id="nav-signup-btn" class="btn-primary btn-sm">Sign Up</button>
+                    </div>
+                </div>
+            </nav>
+            
+            <div class="hero-section">
+                <div class="hero-content">
+                    <h1 class="hero-title">Start Your Fitness Journey Today</h1>
+                    <p class="hero-subtitle">Track your workouts, set weekly goals, and earn achievements. Join FitTrack and transform your life.</p>
+                    <ul class="feature-list">
+                        <li>✅ Simple Workout Logging</li>
+                        <li>✅ Visual Progress Tracking</li>
+                        <li>✅ Unlock Fun Badges</li>
+                    </ul>
+                </div>
+                
+                <div class="hero-image">
+                    <div style="font-size: 150px; text-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: rotate(-5deg);">🏃‍♂️💨</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIN MODAL -->
+    <div id="login-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" id="close-modal-btn">&times;</span>
+            <h2>Welcome Back!</h2>
+            <p style="color: var(--text-muted); margin-bottom: 25px;">Sign in to access your dashboard.</p>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" placeholder="student@university.edu" required>
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" placeholder="••••••••" required>
+                </div>
+                <div class="form-row">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="remember-me"> Remember me
+                    </label>
+                    <a href="#" class="forgot-link">Forgot Password?</a>
+                </div>
+                <button type="submit" class="btn-primary" style="width: 100%;">Sign In</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- APP WRAPPER -->
+    <div id="app-wrapper" class="view hidden">
+        <!-- SIDEBAR -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>🏋️ FitTrack</h2>
+            </div>
+            <nav class="sidebar-nav">
+                <a href="#" class="nav-link active" data-target="dashboard-view">📊 Dashboard</a>
+                <a href="#" class="nav-link" data-target="goals-view">🎯 Goals & Log</a>
+            </nav>
+            <div class="sidebar-footer">
+                <a href="#" class="nav-link" id="logout-btn">🚪 Logout</a>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-content">
+            
+            <!-- DASHBOARD VIEW -->
+            <section id="dashboard-view" class="page-section active">
+                <header class="page-header">
+                    <h1>Dashboard</h1>
+                    <p>Overview of your fitness journey</p>
+                </header>
+
+                <div class="dashboard-main-grid">
+                    <div class="dashboard-left">
+                        <div class="quick-log-card card">
+                            <h2>⚡ Quick Calculate</h2>
+                            <form id="quick-calc-form" class="quick-calc-form">
+                                <div class="form-group-inline">
+                                    <label>Steps</label>
+                                    <input type="number" id="calc-steps" placeholder="e.g. 5000" required min="0">
+                                </div>
+                                <div class="form-group-inline">
+                                    <label>Distance (km)</label>
+                                    <input type="number" step="0.1" id="calc-dist" placeholder="e.g. 3.5" required min="0">
+                                </div>
+                                <div class="form-group-inline">
+                                    <label>Time (min)</label>
+                                    <input type="number" id="calc-time" placeholder="e.g. 30" required min="0">
+                                </div>
+                                <div class="form-group-inline">
+                                    <label>Weight (kg)</label>
+                                    <input type="number" step="0.1" id="calc-weight" placeholder="e.g. 70" required min="0">
+                                </div>
+                                <button type="submit" class="btn-primary">Calculate</button>
+                            </form>
+                        </div>
+
+                        <div class="overview-grid">
+                            <div class="stat-card">
+                                <div class="stat-icon">🔥</div>
+                                <div class="stat-info">
+                                    <h3>Calories</h3>
+                                    <p class="stat-value" id="calories-val" style="transition: all 0.3s ease;">0 kcal</p>
+                                    <p class="stat-sub">Burned today</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- GOALS & LOG VIEW -->
+            <section id="goals-view" class="page-section hidden">
+                <header class="page-header">
+                    <h1>Goals & Log</h1>
+                    <p>Set targets and record your workouts</p>
+                </header>
+                
+                <div class="top-grid">
+                    <section class="card goal-section">
+                        <h2>🎯 Your Weekly Goal</h2>
+                        <div class="goal-input">
+                            <input type="number" id="goal-target" placeholder="Target workouts/week" min="1">
+                            <button id="save-goal-btn" class="btn-primary">Set Goal</button>
+                        </div>
+                        <div class="progress-container">
+                            <p>Progress this week: <span><span id="current-progress">0</span> / <span id="goal-display">0</span></span></p>
+                            <div class="progress-bar-bg">
+                                <div id="progress-bar-fill" class="progress-bar-fill"></div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section class="card log-section">
+                        <h2>📝 Log a Workout</h2>
+                        <form id="workout-form">
+                            <div class="form-group">
+                                <label for="workout-date">Date</label>
+                                <input type="date" id="workout-date" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="workout-type">Exercise Type</label>
+                                <select id="workout-type" required>
+                                    <option value="">Select an exercise...</option>
+                                    <option value="Running">Running 🏃</option>
+                                    <option value="Cycling">Cycling 🚴</option>
+                                    <option value="Weightlifting">Weightlifting 🏋️</option>
+                                    <option value="Yoga">Yoga 🧘</option>
+                                    <option value="Swimming">Swimming 🏊</option>
+                                    <option value="Walking">Walking 🚶</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="workout-duration">Duration (minutes)</label>
+                                <input type="number" id="workout-duration" min="1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="workout-notes">Notes (Optional)</label>
+                                <input type="text" id="workout-notes" placeholder="How did it feel?">
+                            </div>
+                            <button type="submit" id="log-btn" class="btn-primary">Log Workout</button>
+                        </form>
+                    </section>
+                </div>
+
+                <section class="card history-section">
+                    <h2>🕒 Workout History</h2>
+                    <div class="history-controls">
+                        <button id="clear-history-btn" class="danger-btn">Clear History</button>
+                    </div>
+                    <ul id="workout-list" class="workout-list">
+                        <!-- Workout items will appear here -->
+                    </ul>
+                </section>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
